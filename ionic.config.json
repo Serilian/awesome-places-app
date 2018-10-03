@@ -1,0 +1,7 @@
+{
+  "name": "awesome-places-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
