@@ -10,7 +10,7 @@
 
 <ion-content padding>
 
-  <form>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <ion-list>
       <ion-item>
         <ion-label fixed>Title</ion-label>
@@ -39,6 +39,27 @@
       <ion-row>
         <ion-col>
           <p>Selected place</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <h5>Take a photo</h5>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <button ion-button icon-left block outline type="button" (click)="onTakePhoto()">
+          <ion-icon name="camera"></ion-icon>
+          Open Camera
+        </button>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <img [src]="" alt=""/>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button color="secondary" type="submit" ion-button block [disabled]="!form.valid">Add this place</button>
         </ion-col>
       </ion-row>
     </ion-grid>
