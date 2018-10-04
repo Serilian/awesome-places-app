@@ -6,9 +6,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import {AddPlacePage} from "../pages/add-place/add-place";
+import {PlacePage} from "../pages/place/place";
+import {SetLocationPage} from "../pages/set-location/set-location";
 
 @NgModule({
   declarations: [
+    AddPlacePage,
+    PlacePage,
+    SetLocationPage,
     MyApp,
     HomePage
   ],
@@ -18,6 +24,9 @@ import { HomePage } from '../pages/home/home';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
+    AddPlacePage,
+    PlacePage,
+    SetLocationPage,
     MyApp,
     HomePage
   ],
