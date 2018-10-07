@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {ModalController} from 'ionic-angular';
 import {AddPlacePage} from "../add-place/add-place";
+import {PlacesService} from "../../services/places.service";
+import {Place} from "../../models/place";
+import {PlacePage} from "../place/place";
 
 @Component({
   selector: 'page-home',
@@ -8,9 +11,19 @@ import {AddPlacePage} from "../add-place/add-place";
 })
 export class HomePage {
 
+  places: Place[];
   addPlacesPage = AddPlacePage;
-  constructor(public navCtrl: NavController) {
-
+  constructor(public mCtrl: ModalController, private pservice: PlacesService) {
   }
+
+  ionViewWillEnter () {
+    this.places = this.pservice.loadPlaces();
+  }
+
+  onOpenPlace(place: Place) {
+    const modal = this.mCtrl.create(PlacePage, {place: place});
+    modal.present();
+  }
+
 
 }

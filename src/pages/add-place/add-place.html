@@ -54,9 +54,9 @@
           Open Camera
         </button>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="imageUrl !=''">
         <ion-col>
-          <img [src]="" alt=""/>
+          <img [src]="imageUrl" alt=""/>
         </ion-col>
       </ion-row>
       <ion-row>
