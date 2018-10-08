@@ -14,4 +14,7 @@ export class  PlacesService {
     return this.places.slice();
   }
 
+  deletePlace(index: number) {
+    this.places.splice(index, 1);
+  }
 }

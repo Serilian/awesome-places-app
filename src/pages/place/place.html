@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{place.title}}</ion-title>
+    <ion-title>{{currentPlace.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,18 +11,18 @@
   <ion-grid>
     <ion-row>
       <ion-col text-center>
-        <img src="{{place.imageUrl}}" alt="">
+        <img src="{{currentPlace.imageUrl}}" alt="">
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <p>{{place.description}}</p>
+        <p>{{currentPlace.description}}</p>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <agm-map [latitude]="place.location.lat" [longitude]="place.location.lgn" [zoom]="16">
-          <agm-marker [latitude]="place.location.lat" [longitude]="place.location.lgn"></agm-marker>
+        <agm-map [latitude]="currentPlace.location.lat" [longitude]="currentPlace.location.lgn" [zoom]="16">
+          <agm-marker [latitude]="currentPlace.location.lat" [longitude]="currentPlace.location.lgn"></agm-marker>
         </agm-map>
       </ion-col>
     </ion-row>
@@ -31,7 +31,7 @@
         <button ion-button block (click)="onLeave()">Leave</button>
       </ion-col>
       <ion-col>
-        <button ion-button block (click)="onDelete()">Delete Place</button>
+        <button ion-button block color="danger" (click)="onDelete()">Delete Place</button>
       </ion-col>
     </ion-row>
   </ion-grid>

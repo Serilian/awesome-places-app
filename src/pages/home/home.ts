@@ -20,8 +20,8 @@ export class HomePage {
     this.places = this.pservice.loadPlaces();
   }
 
-  onOpenPlace(place: Place) {
-    const modal = this.mCtrl.create(PlacePage, {place: place});
+  onOpenPlace(place: Place, index:number) {
+    const modal = this.mCtrl.create(PlacePage, {place: place, index: index});
     modal.present();
   }
 

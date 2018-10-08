@@ -6,6 +6,10 @@ import {Location} from "../../models/location";
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera} from '@ionic-native/camera';
 import {PlacesService} from "../../services/places.service";
+import {File} from '@ionic-native/file'
+
+
+declare var cordova: any;
 
 @IonicPage()
 @Component({
@@ -22,7 +26,13 @@ export class AddPlacePage {
   isLocationSet = false;
   imageUrl:string = '';
 
-  constructor(private geolocation: Geolocation, private modalCtrl: ModalController, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private camera: Camera, private pservice: PlacesService,
+  constructor(private geolocation: Geolocation,
+              private modalCtrl: ModalController,
+              private loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
+              private file: File,
+              private camera: Camera,
+              private pservice: PlacesService,
               private navCtr: NavController) {
   }
 
@@ -85,9 +95,31 @@ export class AddPlacePage {
       encodingType: this.camera.EncodingType.JPEG
     })
       .then(imageData => {
+        const currentName = imageData.replace(/^.*[\\\/]/, '');
+        const path = imageData.replace(/[^\/]*$/, '');
+        this.file.moveFile(path, currentName, cordova.file.dataDirectory, currentName)
+          .then((data)=> {
+            this.imageUrl = data.nativeURL;
+            this.camera.cleanup();
+            this.file.removeFile(path, currentName);
+          })
+          .catch(err => {
+            this.imageUrl = '';
+            const toast = this.toastCtrl.create({
+              message: 'Could not save the image. PLease try again!',
+              duration: 2500
+            });
+            toast.present();
+          });
         this.imageUrl = imageData;
+        this.camera.cleanup();
       })
       .catch(error => {
+        const toast = this.toastCtrl.create({
+          message: 'Could not access the camera. Please try again!',
+          duration: 2500
+        });
+        toast.present();
         console.log('Cant reach camera: ' + error)
       })
   }
